@@ -1,0 +1,83 @@
+//计算学分绩 
+//注意挂科输出sorry  输出成绩之间有空格
+//c++
+#include <iostream>
+#include<stdio.h>
+using namespace std;
+
+int main()
+{
+int m,n;
+double weight,score,sumweight=0,sumscore=0;
+double ans;int flag=1;
+char subject[30];
+cin>>m;
+while(m--)
+{  cin>>n;sumscore=0;sumweight=0;flag=1;
+while(n--)
+{
+      cin>>subject>>weight>>score;
+      if(score<60){flag=0;}
+      sumweight=weight+sumweight;
+      sumscore=sumscore+weight*score;
+}
+ans=sumscore/sumweight;
+
+if(flag&&ans>=60&&ans>0)printf("%.2f\n",ans);
+else cout<<"Sorry!"<<endl;
+if(m!=0)cout<<endl;
+}
+
+    return 0;
+}
+
+///结构体
+
+#include<iostream>
+#include<iomanip>
+using namespace std;
+struct student
+{
+    double score;
+    double credit;
+    char name[30];
+};
+int main()
+{
+    int n,book;
+    student s[100];
+    int courses;
+    double sum1,sum2;
+    while(cin>>n)
+    {
+        while(n--)
+        {
+            cin>>courses;
+            //getchar();
+            sum1=0;
+            sum2=0;
+            book=0;
+            for(int i=0;i<courses;i++)
+            {
+                cin>>s[i].name;
+                cin>>s[i].credit>>s[i].score;
+                if(s[i].score<60&&s[i].score>0)
+                    book++;
+                sum1=sum1+s[i].credit*s[i].score;
+                sum2=sum2+s[i].credit;
+                /*cin>>name>>credit>>score;
+                if(score<60&&score>0)
+                    book++;
+                sum1=sum1+credit*score;
+                sum2=sum2+credit;*/
+            }
+            if(book>0)
+                cout<<"Sorry!"<<endl;
+            else
+                cout<<std::fixed<<setprecision(2)<<sum1/sum2<<endl;
+            if(n)
+                cout<<endl;
+        }
+    }
+    return 0;
+}
